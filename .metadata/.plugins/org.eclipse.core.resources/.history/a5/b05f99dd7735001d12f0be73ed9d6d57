@@ -1,0 +1,24 @@
+package com.vn.downloadfile;
+
+import org.springframework.http.server.ServletServerHttpRequest;
+import org.springframework.http.server.ServletServerHttpResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("")
+public class DownloadFileController {
+
+	@GetMapping(value = { "/", "/index" })
+	public String index() {
+		return "index";
+	}
+
+	@GetMapping("/download-excel")
+	public String download(ServletServerHttpRequest request, ServletServerHttpResponse response) {
+		DownloadFileController app = new DownloadFileController();
+		HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(app.getFileFromResource("test.xls")));
+		return "index";
+	}
+}

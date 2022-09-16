@@ -1,0 +1,15 @@
+package com.vn.downloadfile;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/download")
+public class DownloadFileController {
+
+	@GetMapping("download-excel")
+	public String index() {
+		return "index";
+	}
+}
