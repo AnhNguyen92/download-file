@@ -1,13 +1,10 @@
 package com.vn.downloadfile;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +14,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("")
@@ -28,7 +26,8 @@ public class DownloadFileController {
 	}
 
 	@GetMapping("/download-excel")
-	public String download(HttpServletRequest request, HttpServletResponse response)
+	@ResponseBody
+	public void download(HttpServletRequest request, HttpServletResponse response)
 			throws FileNotFoundException, IOException, URISyntaxException {
 		DownloadFileController app = new DownloadFileController();
 		HSSFWorkbook workbook = new HSSFWorkbook(app.getFileAsStream("test.xls"));
@@ -46,7 +45,6 @@ public class DownloadFileController {
 			// TODO: change to log.error
 			System.out.println(e.getMessage());
 		}
-		return "index";
 	}
 
 	private InputStream getFileAsStream(String fileName) {
